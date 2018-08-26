@@ -1,32 +1,77 @@
-
-
-#include "PPM.h"
 #include <cstdlib>
 #include <iomanip>
-#include "Color.cpp"
+
 /*
-* Empty Contructor. 
+* Empty Contructor. ?
 */
 Side::Side() {
-   side2D.resize (n);
-   	for (int i = 0; i < side2D.size (); i++)
-    side2D[i].resize (n);
-
+    this.side2D.resize (3);
+   	for (int i = 0; i < side2D.size (); i++){
+   	    this.side2D[i].resize (3);
+   	}
 }
 /*
 * this contructor creates a side with one given color.
 */
-Side::Side(Color color) {
-   side2D.resize (n);
+Side::Side(int colorNumber) {
+    // n*m array where n =3 & m =3
+   this.side2D.resize (3);
    	for (int i = 0; i < side2D.size (); i++)
-    side2D[i].resize (n);
+    this.side2D[i].resize (3);
+    
      for (int i = 0; i < side2D.size (); i++)
     {
       for (int j = 0; j < side2D[i].size (); j++)
 	{
-		side2D[i][j] = 
+		this.side2D[i][j] = getColor(colorNumber);
 	}
     }    
       
 }
+/*
+* returns a color 1-white, 2-green 3-red, 4-blue, 5-orange 6-yellow
+* based on the sides given in this order
+*/
+std::string Side::getColor(const int& index){
+    return colors[index];
+}
+/*
+*	std::string getSideColor(const int& row, const int& col);
+	void setSideColor(const int& row, const int& col);
+	Side getSide();
+*/
 
+std::string Side::getSideColor(const int& row, const int& col){
+    if(row > 2 || col > 2 ){
+        return "Error";
+    }
+    return this.side2D[row][col];
+}
+void Side::setSideColor(const int& row, const int& col, std::string color){
+    this.side2D[row][col] = color;
+    
+}
+// not quite sure if this works 
+Side Side::getSide(){
+    return this.Side;    
+}
+/*
+*overloading operator, maybe user ur setters?
+*/
+
+std::istream &operator>>(std::istream &fin, Side &mySide){
+    for (int i = 0; i < mySide.string2D.size( ); i++){
+         for (int j = 0; j < mySide.string2D[i].size( ); j++){
+            fin >> mySide.string2D[i][j];
+         }
+    }
+    return fin;    
+}
+std::ostream &operator<<(std::ostream &fout, Side &mySide){
+    for (int i = 0; i < mySide.string2D.size( ); i++){
+         for (int j = 0; j < mySide.string2D[i].size( ); j++){
+            fout << mySide.string2D[i][j] + " ";
+         }
+    }
+    return fout; 
+}

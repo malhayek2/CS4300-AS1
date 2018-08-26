@@ -1,30 +1,30 @@
 #ifndef _SIDE_H_
 #define _SIDE_H_
 #include <iostream>
-#include "Color.cpp"
 #include <string>
 #include <fstream>
-
+#include <vector>
 class Side {
 public:
 	/*
 	*the contructor
 	*/
 	Side();
-	Side(Color color);
+	Side(int colorNumber);
 	/*
 	* Getters & Setters
 	*/
-	std::string getValue(const int& row, const int& col);
-	void setValue(const int& row, const int& col);
-	Side getSide();	
+	std::string getSideColor(const int& row, const int& col);
+	void setSideColor(const int& row, const int& col, std::string color);
+	Side getSide();
+	std::string getColor(const int& index);
 
 };
 
 private:
 
-	std::string value[5][5];
-
+    vector<vector<string>> side2D;
+    const std::string colors[] = {"white","green","red","blue","orange", "yellow"};
 };
 /*
 * input & output operators
