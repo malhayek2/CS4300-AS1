@@ -32,7 +32,7 @@ Side::Side(int colorNumber) {
 * returns a color 1-white, 2-green 3-red, 4-blue, 5-orange 6-yellow
 * based on the sides given in this order
 */
-std::string Side::getColor(int index)const{
+std::string Side::getColor(const int& index) const{
     return colors[index];
 }
 /*
@@ -41,18 +41,18 @@ std::string Side::getColor(int index)const{
 	Side getSide();
 */
 
-std::string Side::getSideColor(int row,int col)const{
+std::string Side::getSideColor(const int& row, const int& col)const{
     if(row > 2 || col > 2 ){
         return "Error";
     }
     return this->side2D[row][col];
 }
-void Side::setSideColor(int row, int col, std::string color){
+void Side::setSideColor(const int& row, const int& col, std::string color){
     this->side2D[row][col] = color;
     
 }
 // not quite sure if this works 
-Side Side::getSide()const{
+Side Side::getSide() const{
     return this.Side;    
 }
 /*

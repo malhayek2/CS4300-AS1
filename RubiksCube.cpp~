@@ -32,7 +32,7 @@ void RubiksCube::setSide(int index, std::istream &fin) {
 }
 
 void RubiksCube::rotateCW(int index) {
-    vector<std::string> side1 = new 
+    vector<std::string> side1;
     vector<std::string> side2;
     vector<std::string> side3;
     vector<std::string> side4;

@@ -19,9 +19,9 @@ void menu() {
             std::string side;
             int sideIndex;
             std::string command; 
-            std::cin >> side;
+            std::cin << side;
             sideIndex = myCube.helper_color(side);
-            std::cin >> command;
+            std::cin << command;
             if(command == "cw"){
                 myCube.rotateCW(sideIndex);
             }else if (command == "ccw"){

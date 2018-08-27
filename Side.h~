@@ -15,10 +15,10 @@ public:
 	/*
 	* Getters & Setters
 	*/
-	std::string getSideColor(int  row, int col)const  ;
-	void setSideColor(int row, int col, std::string color);
-	Side getSide()const ;
-	std::string getColor(int index)const ;
+	std::string getSideColor(const int& row, const int& col)  ;
+	void setSideColor(const int& row, const int& col, std::string color);
+	Side getSide() ;
+	std::string getColor(const int& index) ;
 
 
 
