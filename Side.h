@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <string>
 class Side {
 public:
 	/*
@@ -21,7 +22,7 @@ public:
 
 };
 
-private:
+protected:
 
     vector<vector<string>> side2D;
     const std::string colors[] = {"white","green","red","blue","orange", "yellow"};

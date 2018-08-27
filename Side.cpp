@@ -5,9 +5,9 @@
 * Empty Contructor. ?
 */
 Side::Side() {
-    this.side2D.resize (3);
+    this->side2D.resize (3);
    	for (int i = 0; i < side2D.size (); i++){
-   	    this.side2D[i].resize (3);
+   	    this->side2D[i].resize (3);
    	}
 }
 /*
@@ -15,15 +15,15 @@ Side::Side() {
 */
 Side::Side(int colorNumber) {
     // n*m array where n =3 & m =3
-   this.side2D.resize (3);
+   this->side2D.resize (3);
    	for (int i = 0; i < side2D.size (); i++)
-    this.side2D[i].resize (3);
+    this->side2D[i].resize (3);
     
      for (int i = 0; i < side2D.size (); i++)
     {
       for (int j = 0; j < side2D[i].size (); j++)
 	{
-		this.side2D[i][j] = getColor(colorNumber);
+		this->side2D[i][j] = getColor(colorNumber);
 	}
     }    
       
@@ -45,10 +45,10 @@ std::string Side::getSideColor(const int& row, const int& col){
     if(row > 2 || col > 2 ){
         return "Error";
     }
-    return this.side2D[row][col];
+    return this->side2D[row][col];
 }
 void Side::setSideColor(const int& row, const int& col, std::string color){
-    this.side2D[row][col] = color;
+    this->side2D[row][col] = color;
     
 }
 // not quite sure if this works 

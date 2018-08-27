@@ -5,6 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <Side.h>
+#include <string>
 class RubiksCube {
 public:
 	/*
@@ -18,6 +19,7 @@ public:
 	void setSide(int index, std::istream &fin);
 	void rotateCW(int index);
 	void rotateCCW(int index);
+        int helper_color(std::string colorValue); 
 
 };
 
