@@ -17,21 +17,20 @@ public:
 	*/
 	std::string getSideColor(int  row, int col)const  ;
 	void setSideColor(int row, int col, std::string color);
-	Side getSide()const ;
 	std::string getColor(int index)const ;
+	std::vector<std::vector<std::string>> getSide2D() const;
 
-
+	std::string colors[6] = { "white","green","red","blue","orange", "yellow" };
 
 protected:
 
-    vector<vector<string>> side2D;
-    const std::string colors[] = {"white","green","red","blue","orange", "yellow"};
+    std::vector<std::vector<std::string>> side2D;
+
+
 };
 /*
 * input & output operators
 */
 std::ostream &operator<<(std::ostream &fout, Side &mySide); //operator to send object to std::ostream cout << PPMIns;
 std::istream &operator>>(std::istream &fin, Side &mySide); // operator to retrieve object from std::istream
-// bool operator==(const RubiksCube& rhs) const;
-// bool operator<(const RubiksCube& rhs) const;
 #endif /* SIDE_H_ */

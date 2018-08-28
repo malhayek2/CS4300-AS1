@@ -4,15 +4,15 @@ CC=g++ -std=c++11
 
 CFLAGS=-c -Wall
 
-all: main
+all: rubik_test
 
-main: main.o Side.o RubiksCube.o
-	$(CC) main.o Side.o RubiksCube.o -o main
-main.o: main.cpp Side.cpp RubiksCube.cpp
-	$(CC) $(CFLAGS) main.cpp Side.cpp RubiksCube.cpp
+rubik_test: rubik_test.o Side.o RubiksCube.o
+	$(CC) rubik_test.o Side.o RubiksCube.o -o rubik_test
+rubik_test.o: rubik_test.cpp Side.cpp RubiksCube.cpp
+	$(CC) $(CFLAGS) rubik_test.cpp Side.cpp RubiksCube.cpp
 RubiksCube.o: RubiksCube.cpp
 	$(CC) $(CFLAGS) RubiksCube.cpp RubiksCube.h
 Side.o: Side.cpp
 	$(CC) $(CFLAGS) Side.cpp Side.h
 clean:
-	rm -rf *o main
+	rm -rf *o rubik_test

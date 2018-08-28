@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <iomanip>
+#include "Side.h"
 
 /*
 * Empty Contructor. ?
@@ -9,6 +10,7 @@ Side::Side() {
    	for (int i = 0; i < side2D.size (); i++){
    	    this->side2D[i].resize (3);
    	}
+
 }
 /*
 * this contructor creates a side with one given color.
@@ -35,6 +37,10 @@ Side::Side(int colorNumber) {
 std::string Side::getColor(int index)const{
     return colors[index];
 }
+std::vector<std::vector<std::string>> Side::getSide2D() const
+{
+	return this->side2D;
+}
 /*
 *	std::string getSideColor(const int& row, const int& col);
 	void setSideColor(const int& row, const int& col);
@@ -42,35 +48,35 @@ std::string Side::getColor(int index)const{
 */
 
 std::string Side::getSideColor(int row,int col)const{
-    if(row > 2 || col > 2 ){
-        return "Error";
-    }
+
     return this->side2D[row][col];
 }
 void Side::setSideColor(int row, int col, std::string color){
+
     this->side2D[row][col] = color;
-    
+
+     
 }
-// not quite sure if this works 
-Side Side::getSide()const{
-    return this.Side;    
-}
+
 /*
 *overloading operator, maybe user ur setters?
 */
 
 std::istream &operator>>(std::istream &fin, Side &mySide){
-    for (int i = 0; i < mySide.string2D.size( ); i++){
-         for (int j = 0; j < mySide.string2D[i].size( ); j++){
-            fin >> mySide.string2D[i][j];
+	std::string newValue;
+    for (int i = 0; i < 3; i++){
+         for (int j = 0; j < 3; j++){
+			 fin >> newValue;
+			 mySide.setSideColor(i,j, newValue);
+			// std::cout << mySide.getSideColor(i, j) << std::endl;
          }
     }
-    return fin;    
+    return fin;     
 }
 std::ostream &operator<<(std::ostream &fout, Side &mySide){
-    for (int i = 0; i < mySide.string2D.size( ); i++){
-         for (int j = 0; j < mySide.string2D[i].size( ); j++){
-            fout << mySide.string2D[i][j] + " ";
+    for (int i = 0; i < 3; i++){
+         for (int j = 0; j < 3; j++){
+            fout << mySide.getSideColor(i,j) + " ";
          }
     }
     return fout; 
