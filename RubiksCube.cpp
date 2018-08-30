@@ -50,6 +50,11 @@ void RubiksCube::setSide(int index, Side side)
 }
 
 void RubiksCube::rotateCW(int index) {
+	/*
+	* bug was foudn that the same side doesnt not rotate with the given rotation.
+	*logic of one side roation 
+	* 0-2 top 3-5 left 6-8 bot 9-11 right side. therefore the vector would hold all size of 12
+	*/
 	std::vector<std::string> side1;
 	side1.resize(3);
     std::vector<std::string> side2;
@@ -58,140 +63,248 @@ void RubiksCube::rotateCW(int index) {
 	side3.resize(3);
 	std::vector<std::string> side4;
 	side4.resize(3);
+	std::vector<std::string> currentSide;
+	currentSide.resize(12);
     if (index == 1) {
+    		Side newSide1 = this->getSide(4);
+			Side newSide2 = this->getSide(3);
+			Side newSide3 = this->getSide(2);
+			Side newSide4 = this->getSide(1);
+			Side currentSideChange = this->getSide(0);
         for (int i = 0; i < 3; i++) {
             side1[i] = this->getSide(4).getSideColor(0, i );
             side2[i] = this->getSide(3).getSideColor(0, i );
             side3[i] = this->getSide(2).getSideColor(0, i );
             side4[i] = this->getSide(1).getSideColor(0, i );
-			Side newSide1 = this->getSide(4);
-			Side newSide2 = this->getSide(3);
-			Side newSide3 = this->getSide(2);
-			Side newSide4 = this->getSide(1);
+
+
 			newSide1.setSideColor(0, i, side4[i]);
 			newSide2.setSideColor(0, i, side1[i]);
 			newSide3.setSideColor(0, i, side2[i]);
 			newSide4.setSideColor(0, i, side3[i]);
 
+        	//TOP
+			currentSide[i] = this->getSide(0).getSideColor(0,i);
+			//left
+			currentSide[3+i] = this->getSide(0).getSideColor(i,2);
+			//BOT
+			currentSide[6+i] = this->getSide(0).getSideColor(2,i);
+			//right 
+			currentSide[9+i] = this->getSide(0).getSideColor(i,0);
+
+
+			currentSideChange.setSideColor(0,i,currentSide[11-i]);
+			currentSideChange.setSideColor(i,2,currentSide[i]);
+			currentSideChange.setSideColor(2,i,currentSide[5-i]);
+			currentSideChange.setSideColor(i,0,currentSide[6+i]);
+
+
+
+
+        }
+			this->setSide(0, currentSideChange);
+
 			this->setSide(4, newSide1);
 			this->setSide(3, newSide2);
 			this->setSide(2, newSide3);
 			this->setSide(1, newSide4);
+			this->setSide(0, currentSideChange);
 
-        }
-
+        //?? ERROR
     } else if (index == 2) {
-
-
+   		Side newSide1 = this->getSide(0);
+		Side newSide2 = this->getSide(2);
+		Side newSide3 = this->getSide(5);
+		Side newSide4 = this->getSide(4);
+		Side currentSideChange = this->getSide(1);
         for (int i = 0; i < 3; i++) {
             side1[i] = this->getSide(0).getSideColor(i , 0);
             side2[i] = this->getSide(2).getSideColor(i , 0);
-            side3[i] = this->getSide(5).getSideColor(i , 0);
-            side4[i] = this->getSide(4).getSideColor(i , 2);
-			Side newSide1 = this->getSide(0);
-			Side newSide2 = this->getSide(2);
-			Side newSide3 = this->getSide(5);
-			Side newSide4 = this->getSide(4);
-			newSide1.setSideColor(i, 0, side4[i]);
+            side3[i] = this->getSide(5).getSideColor(i , 0);// backwards
+            side4[i] = this->getSide(4).getSideColor(i , 2);// backwards
+
+			newSide1.setSideColor(2-i, 0, side4[i]);
 			newSide2.setSideColor(i, 0, side1[i]);
 			newSide3.setSideColor(i, 0, side2[i]);
-			newSide4.setSideColor(i, 2, side3[i]);
+			newSide4.setSideColor(2-i, 2, side3[i]);
+			        	//TOP
+			currentSide[i] = this->getSide(1).getSideColor(0,i);
+			//left
+			currentSide[3+i] = this->getSide(1).getSideColor(i,2);
+			//BOT
+			currentSide[6+i] = this->getSide(1).getSideColor(2,i);
+			//right 
+			currentSide[9+i] = this->getSide(1).getSideColor(i,0);
 
+			
+			currentSideChange.setSideColor(0,i,currentSide[11-i]);
+			currentSideChange.setSideColor(i,2,currentSide[i]);
+			currentSideChange.setSideColor(2,i,currentSide[5-i]);
+			currentSideChange.setSideColor(i,0,currentSide[6+i]);
+
+
+        }
+        	this->setSide(1, currentSideChange);
 			this->setSide(0, newSide1);
 			this->setSide(2, newSide2);
 			this->setSide(5, newSide3);
 			this->setSide(4, newSide4);
-
-        }
     } else if (index == 3) {
-
-        for (int i = 0; i < 3; i++) {
-            side1[i] = this->getSide(0).getSideColor(2,i);
-            side2[i] = this->getSide(3).getSideColor(i , 0);
-            side3[i] = this->getSide(5).getSideColor(0, i );
-            side4[i] = this->getSide(1).getSideColor(i , 2);
-			Side newSide1 = this->getSide(0);
+    		Side newSide1 = this->getSide(0);
 			Side newSide2 = this->getSide(3);
 			Side newSide3 = this->getSide(5);
 			Side newSide4 = this->getSide(1);
-			newSide1.setSideColor(2, i, side4[i]);
+			Side currentSideChange = this->getSide(2);
+        for (int i = 0; i < 3; i++) {
+            side1[i] = this->getSide(0).getSideColor(2,i); //gets orange someHOW
+            side2[i] = this->getSide(3).getSideColor(i , 0);// top to bot
+            side3[i] = this->getSide(5).getSideColor(0, i );
+            side4[i] = this->getSide(1).getSideColor(i , 2);// backwards
+			// Side newSide1 = this->getSide(0);
+			// Side newSide2 = this->getSide(3);
+			// Side newSide3 = this->getSide(5);
+			// Side newSide4 = this->getSide(1);
+			newSide1.setSideColor(2, 2-i, side4[i]);
 			newSide2.setSideColor(i, 0, side1[i]);
-			newSide3.setSideColor(0, i, side2[i]);
+			newSide3.setSideColor(0, 2-i, side2[i]);
 			newSide4.setSideColor(i, 2, side3[i]);
+			        	//TOP
+			currentSide[i] = this->getSide(2).getSideColor(0,i);
+			//left
+			currentSide[3+i] = this->getSide(2).getSideColor(i,2);
+			//BOT
+			currentSide[6+i] = this->getSide(2).getSideColor(2,i);
+			//right 
+			currentSide[9+i] = this->getSide(2).getSideColor(i,0);
 
+
+			currentSideChange.setSideColor(0,i,currentSide[11-i]);
+			currentSideChange.setSideColor(i,2,currentSide[i]);
+			currentSideChange.setSideColor(2,i,currentSide[5-i]);
+			currentSideChange.setSideColor(i,0,currentSide[6+i]);
+
+			
+        }
+        	this->setSide(2, currentSideChange);
 			this->setSide(0, newSide1);
 			this->setSide(3, newSide2);
 			this->setSide(5, newSide3);
 			this->setSide(1, newSide4);
-			
-        }
 
     } else if (index == 4) {
-
-        for (int i = 0; i < 3; i++) {
-            side1[i] = this->getSide(2).getSideColor(i , 2);
-            side2[i] = this->getSide(0).getSideColor(i , 2);
-            side3[i] = this->getSide(4).getSideColor(i , 0);
-            side4[i] = this->getSide(5).getSideColor(i , 2);
-
 			Side newSide1 = this->getSide(2);
 			Side newSide2 = this->getSide(0);
 			Side newSide3 = this->getSide(4);
 			Side newSide4 = this->getSide(5);
+
+			Side currentSideChange = this->getSide(3);
+        for (int i = 0; i < 3; i++) {
+            side1[i] = this->getSide(2).getSideColor(i , 2);// to 0 same order
+            side2[i] = this->getSide(0).getSideColor(i , 2);//top to bot reg backwards
+            side3[i] = this->getSide(4).getSideColor(i , 0);
+            side4[i] = this->getSide(5).getSideColor(i , 2);
+
 			newSide1.setSideColor(i, 2, side4[i]);
 			newSide2.setSideColor(i, 2, side1[i]);
-			newSide3.setSideColor(i, 0, side2[i]);
-			newSide4.setSideColor(i, 2, side3[i]);
+			newSide3.setSideColor(2-i, 0, side2[i]);
+			newSide4.setSideColor(2-i, 2, side3[i]);
+			        	//TOP
+			currentSide[i] = this->getSide(3).getSideColor(0,i);
+			//left
+			currentSide[3+i] = this->getSide(3).getSideColor(i,2);
+			//BOT
+			currentSide[6+i] = this->getSide(3).getSideColor(2,i);
+			//right 
+			currentSide[9+i] = this->getSide(3).getSideColor(i,0);
 
+			currentSideChange.setSideColor(0,i,currentSide[11-i]);
+			currentSideChange.setSideColor(i,2,currentSide[i]);
+			currentSideChange.setSideColor(2,i,currentSide[5-i]);
+			currentSideChange.setSideColor(i,0,currentSide[6+i]);
+
+
+        }
+        	this->setSide(3, currentSideChange);
 			this->setSide(2, newSide1);
 			this->setSide(0, newSide2);
 			this->setSide(4, newSide3);
 			this->setSide(5, newSide4);
-
-        }
     } else if (index == 5) {
-
-        for (int i = 0; i < 3; i++) {
-            side1[i] = this->getSide(3).getSideColor(i , 2);
-            side2[i] = this->getSide(0).getSideColor(0,  i);
-            side3[i] = this->getSide(1).getSideColor( i, 0);
-            side4[i] = this->getSide(5).getSideColor(2, i);
 			Side newSide1 = this->getSide(3);
 			Side newSide2 = this->getSide(0);
 			Side newSide3 = this->getSide(1);
 			Side newSide4 = this->getSide(5);
-			newSide1.setSideColor(i, 2, side4[i]);
-			newSide2.setSideColor(0, i, side1[i]);
-			newSide3.setSideColor(i, 0, side2[i]);
-			newSide4.setSideColor(2, i, side3[i]);
+			Side currentSideChange = this->getSide(4);
+        for (int i = 0; i < 3; i++) {
+            side1[i] = this->getSide(3).getSideColor(i , 2);
+            side2[i] = this->getSide(0).getSideColor(0,  i);//backwards to number 1 
+            side3[i] = this->getSide(1).getSideColor( i, 0);
+            side4[i] = this->getSide(5).getSideColor(2, i);// backwards to number 3 
 
+			newSide1.setSideColor(2-i, 2, side4[i]);
+			newSide2.setSideColor(0, i, side1[i]);
+			newSide3.setSideColor(2-i, 0, side2[i]);
+			newSide4.setSideColor(2, i, side3[i]);
+			        	//TOP
+			currentSide[i] = this->getSide(4).getSideColor(0,i);
+			//left
+			currentSide[3+i] = this->getSide(4).getSideColor(i,2);
+			//BOT
+			currentSide[6+i] = this->getSide(4).getSideColor(2,i);
+			//right 
+			currentSide[9+i] = this->getSide(4).getSideColor(i,0);
+
+
+			currentSideChange.setSideColor(0,i,currentSide[11-i]);
+			currentSideChange.setSideColor(i,2,currentSide[i]);
+			currentSideChange.setSideColor(2,i,currentSide[5-i]);
+			currentSideChange.setSideColor(i,0,currentSide[6+i]);
+
+
+        }
+        	this->setSide(4, currentSideChange);
 			this->setSide(3, newSide1);
 			this->setSide(0, newSide2);
 			this->setSide(1, newSide3);
 			this->setSide(5, newSide4);
-
-        }
     } else if (index == 6) {
+    		Side newSide1 = this->getSide(3);
+			Side newSide2 = this->getSide(4);
+			Side newSide3 = this->getSide(1);
+			Side newSide4 = this->getSide(2);
+			Side currentSideChange = this->getSide(5);
         for (int i = 0; i < 3; i++) {
             side1[i] = this->getSide(3).getSideColor(2, i);
             side2[i] = this->getSide(4).getSideColor(2, i);
             side3[i] = this->getSide(1).getSideColor(2, i);
             side4[i] = this->getSide(2).getSideColor(2, i);
-			Side newSide1 = this->getSide(3);
-			Side newSide2 = this->getSide(4);
-			Side newSide3 = this->getSide(1);
-			Side newSide4 = this->getSide(2);
+
 			newSide1.setSideColor(2, i, side4[i]);
 			newSide2.setSideColor(2, i, side1[i]);
 			newSide3.setSideColor(2, i, side2[i]);
 			newSide4.setSideColor(2, i, side3[i]);
+			        	//TOP
+			currentSide[i] = this->getSide(5).getSideColor(0,i);
+			//left
+			currentSide[3+i] = this->getSide(5).getSideColor(i,2);
+			//BOT
+			currentSide[6+i] = this->getSide(5).getSideColor(2,i);
+			//right 
+			currentSide[9+i] = this->getSide(5).getSideColor(i,0);
 
+
+			currentSideChange.setSideColor(0,i,currentSide[11-i]);
+			currentSideChange.setSideColor(i,2,currentSide[i]);
+			currentSideChange.setSideColor(2,i,currentSide[5-i]);
+			currentSideChange.setSideColor(i,0,currentSide[6+i]);
+
+
+        }
+        	this->setSide(5, currentSideChange);
 			this->setSide(3, newSide1);
 			this->setSide(4, newSide2);
 			this->setSide(1, newSide3);
 			this->setSide(2, newSide4);
-
-        }
     }
 }
 
